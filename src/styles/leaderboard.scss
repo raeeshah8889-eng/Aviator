@@ -1,0 +1,167 @@
+.leaderboard-page {
+  min-height: 100vh;
+  background: #0f0f1a;
+  padding: 40px 20px;
+}
+
+.leaderboard-header {
+  max-width: 1000px;
+  margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .back-button {
+    color: #6c63ff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 2px solid #6c63ff;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #6c63ff;
+      color: white;
+    }
+  }
+
+  h1 {
+    font-size: 48px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffd700 0%, #ff8800 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: 60px;
+  font-size: 24px;
+  color: #888;
+}
+
+.leaderboard-table-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #1a1a2e;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background: #2a2a4a;
+
+    tr {
+      th {
+        padding: 20px;
+        text-align: left;
+        font-size: 16px;
+        font-weight: 700;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #0f0f1a;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(108, 99, 255, 0.1);
+      }
+
+      &.top-three {
+        background: rgba(255, 215, 0, 0.05);
+      }
+
+      td {
+        padding: 20px;
+        border-bottom: 1px solid #2a2a4a;
+
+        &.rank {
+          font-size: 32px;
+          font-weight: 900;
+          text-align: center;
+
+          @keyframes shine {
+            0%, 100% {
+              filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+            }
+            50% {
+              filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));
+            }
+          }
+        }
+
+        &.username {
+          font-size: 18px;
+          font-weight: 600;
+          color: white;
+        }
+
+        &.profit-positive {
+          color: #00d4aa;
+          font-size: 20px;
+          font-weight: 700;
+        }
+
+        &.profit-negative {
+          color: #ff4444;
+          font-size: 20px;
+          font-weight: 700;
+        }
+
+        &.multiplier {
+          font-size: 18px;
+          color: #6c63ff;
+          font-weight: 600;
+        }
+
+        &.wins {
+          font-size: 18px;
+          color: #888;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .leaderboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    h1 {
+      font-size: 32px;
+    }
+  }
+
+  .leaderboard-table {
+    thead tr th {
+      padding: 12px;
+      font-size: 12px;
+    }
+
+    tbody tr td {
+      padding: 12px;
+      font-size: 14px;
+
+      &.rank {
+        font-size: 20px;
+      }
+    }
+  }
+}

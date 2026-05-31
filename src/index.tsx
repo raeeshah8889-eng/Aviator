@@ -1,22 +1,31 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
+import './styles/index.scss';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import './index.scss';
-import App from './app';
-import { Provider } from './context';
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 
-createRoot(document.getElementById("root") as HTMLElement).render(
-	<BrowserRouter>
-		<Routes>
-			<Route path="*" element={
-				<Provider>
-					<App />
-					<ToastContainer position="top-center" theme="dark" />
-				</Provider>
-			} />
-		</Routes>
-	</BrowserRouter>
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+    </BrowserRouter>
+  </React.StrictMode>
 );
