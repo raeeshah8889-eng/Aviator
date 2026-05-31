@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./components/header";
-import BetsUsers from "./components/bet-users";
+import Header from "./components/Header";
+import BetsUsers from "./components/BetUsers";
 import Main from "./components/Main";
 // import { useCrashContext } from "./components/Main/context";
 import propeller from "./assets/images/propeller.png";

@@ -102,6 +102,7 @@ interface ContextDataType {
 
 interface ContextType extends GameBetLimit, UserStatusType, GameStatusType {
   state: ContextDataType;
+  userInfo: UserType;
   unityState: boolean;
   unityLoading: boolean;
   currentProgress: number;
@@ -111,10 +112,18 @@ interface ContextType extends GameBetLimit, UserStatusType, GameStatusType {
   rechargeState: boolean;
   myUnityContext: UnityContext;
   currentTarget: number;
+  msgReceived: boolean;
+  msgTab: boolean;
+  userSeedText: string;
   setCurrentTarget(attrs: Partial<number>);
+  setMsgReceived(attrs: Partial<boolean>);
   update(attrs: Partial<ContextDataType>);
+  updateUserInfo(attrs: Partial<UserType>);
   getMyBets();
   updateUserBetState(attrs: Partial<UserStatusType>);
+  handleChangeUserSeed(attrs: Partial<string>);
+  handleGetSeed();
+  toggleMsgTab();
 }
 
 const unityContext = new UnityContext({
@@ -208,6 +217,11 @@ export const Provider = ({ children }: any) => {
   const update = (attrs: Partial<ContextDataType>) => {
     setState({ ...state, ...attrs });
   };
+
+  const updateUserInfo = (attrs: Partial<UserType>) => {
+    setState({ ...state, userInfo: { ...state.userInfo, ...attrs } });
+  };
+
   const [previousHand, setPreviousHand] = React.useState<UserType[]>([]);
   const [history, setHistory] = React.useState<number[]>([]);
   const [userBetState, setUserBetState] = React.useState<UserStatusType>({
@@ -219,8 +233,25 @@ export const Provider = ({ children }: any) => {
   newBetState = userBetState;
   const [rechargeState, setRechargeState] = React.useState(false);
   const [currentTarget, setCurrentTarget] = React.useState(0);
+  const [msgReceived, setMsgReceived] = React.useState(false);
+  const [msgTab, setMsgTab] = React.useState(false);
+  const [userSeedText, setUserSeedText] = React.useState("");
+
   const updateUserBetState = (attrs: Partial<UserStatusType>) => {
     setUserBetState({ ...userBetState, ...attrs });
+  };
+
+  const toggleMsgTab = () => {
+    setMsgTab(!msgTab);
+  };
+
+  const handleChangeUserSeed = (seed: Partial<string>) => {
+    setUserSeedText(seed as string);
+  };
+
+  const handleGetSeed = () => {
+    // Implementation for getting seed
+    console.log("Getting seed...");
   };
 
   const [betLimit, setBetLimit] = React.useState<GameBetLimit>({
@@ -499,20 +530,29 @@ export const Provider = ({ children }: any) => {
     <Context.Provider
       value={{
         state: state,
+        userInfo: state.userInfo,
         ...betLimit,
         ...userBetState,
         ...unity,
         ...gameState,
         currentTarget,
         rechargeState,
+        msgReceived,
+        msgTab,
+        userSeedText,
         myUnityContext: unityContext,
         bettedUsers: [...bettedUsers],
         previousHand: [...previousHand],
         history: [...history],
         setCurrentTarget,
+        setMsgReceived,
         update,
+        updateUserInfo,
         getMyBets,
         updateUserBetState,
+        handleChangeUserSeed,
+        handleGetSeed,
+        toggleMsgTab,
       }}
     >
       {children}
