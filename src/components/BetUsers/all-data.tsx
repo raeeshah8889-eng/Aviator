@@ -1,7 +1,6 @@
 import React from "react";
-import Context from "../../context";
+import Context, { BettedUserType, UserType } from "../../context";
 import { displayName } from "../utils";
-import { BetResults, BettedUserType, UserType } from "../../utils/interfaces";
 import { binaryToFloat } from "../utils";
 
 interface AllDataProps {
@@ -11,7 +10,8 @@ interface AllDataProps {
 }
 
 const AllData = ({ pre, setPre, allData }: AllDataProps) => {
-  const { userInfo, bettedUsers } = React.useContext(Context);
+  const { state, bettedUsers } = React.useContext(Context);
+  const userInfo = state.userInfo;
 
   return (
     <>
